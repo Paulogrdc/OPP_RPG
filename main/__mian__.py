@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-
 class Personagem(ABC): 
     def __init__(self):
         pass 
