@@ -87,8 +87,13 @@ class Monstro(Personagem):
         if self._nivel_personagem == 100: 
             print("Você chegou no boss de nível máximo") 
 
-    def dar_xp(self):
-        pass
+    def dar_xp(self,alvo):
+        if self._vida <= 0: 
+            self._xp = self._nivel_personagem * 5 
+            print(f"O {self.nome} Morreu e deu {self._xp} de xp")
+            alvo._barra_xp = self._xp
+            print(f"O {alvo.nome} recebeu {self._xp} de xp. XP: {alvo._barra_xp}/50")
+        
 
     def curar(self):
         fator = random.randint(1,self._vida) 
