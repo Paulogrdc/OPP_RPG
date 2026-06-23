@@ -1,6 +1,11 @@
-def main(): 
+from personagem import * 
 
-    pass 
+def main(): 
+    p1 = Guerreiro("kratos") 
+    m1 = Monstro()
+
+    p1.atacar(m1,10)
+
 
 if __name__ == "__main__":
     main()

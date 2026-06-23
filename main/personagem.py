@@ -44,11 +44,13 @@ class Guerreiro(Personagem):
 
 
     def aumentar_nivel(self):
-        pass 
+        if self._barra_xp > 50: 
+            self._nivel_personagem += 1 
 
     def curar(self):
-        pass
-
+        fator = random.randint(0,self._vida)
+        self._vida += fator
+        print(f"{self.nome} usou uma poção de curar e recuperou {fator} pontos de sua vida")
 
 
 class Mago(Personagem):
@@ -61,10 +63,13 @@ class Mago(Personagem):
 
 
     def aumentar_nivel(self):
-        pass 
+        if self._barra_xp > 50: 
+            self._nivel_personagem += 1
 
     def curar(self):
-        pass
+        fator = random.randint(1,self._vida)
+        self._vida += fator
+        print(f"{self.nome} usou uma magía de cura e recuperou {fator} pontos de vida")
 
 
 class Monstro(Personagem): 
@@ -77,10 +82,18 @@ class Monstro(Personagem):
 
 
     def aumentar_nivel(self):
-        pass 
+        self._nivel_personagem += 1
+        self._vida = self._nivel_personagem * 10
+        if self._nivel_personagem == 100: 
+            print("Você chegou no boss de nível máximo") 
 
     def dar_xp(self):
-        pass 
+        pass
 
-    def curar(slef): 
-        pass 
+    def curar(self):
+        fator = random.randint(1,self._vida) 
+        if self._nivel_personagem >= 90:
+            print(f"O {self.nome}({self._nivel_personagem}) usou uma magia negra e recuperou {fator} pontos de vida. ") 
+        else: 
+            print(f"O {self.nome}({self._nivel_personagem}) tentou usar magia negra para reupearar sua vida, mas ele não tem o nível necessário")
+
