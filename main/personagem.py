@@ -8,7 +8,8 @@ class Personagem(ABC):
         self._nivel_personagem = 1 # Protegido(#)
         self.golpes = []
 
-    def atacar(self,alvo, forca = 50):
+    def atacar(self,alvo):
+        forca = random.randint(1,self._vida)
          # Só ataca se a vida de ambos for maior que 0 
         if self._vida > 0 and alvo._vida > 0: 
             # gerar um golpe aleatório 
@@ -52,7 +53,7 @@ class Guerreiro(Personagem):
         # se o personagem morrer, ele não pode se cuarar 
         if self._vida == 0: 
             print(f" O {self.nome}({self._nivel_personagem}) não pode se curar, pois ele morreu!")
-            
+
         # Só recupera a vida se ela estiver abaixo da vida total
         elif self._vida < vida_cheia:
             # ver o quanto de vida ele vai recuperar
