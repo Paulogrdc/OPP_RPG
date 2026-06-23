@@ -48,9 +48,17 @@ class Guerreiro(Personagem):
             self._nivel_personagem += 1 
 
     def curar(self):
-        fator = random.randint(0,self._vida)
-        self._vida += fator
-        print(f"{self.nome} usou uma poção de curar e recuperou {fator} pontos de sua vida")
+        vida_cheia = self._nivel_personagem * 15
+        # se o personagem morrer, ele não pode se cuarar 
+        if self._vida == 0: 
+            print(f" O {self.nome}({self._nivel_personagem}) não pode se curar, pois ele morreu!")
+            
+        # Só recupera a vida se ela estiver abaixo da vida total
+        elif self._vida < vida_cheia:
+            # ver o quanto de vida ele vai recuperar
+            vida_curar = vida_cheia - self._vida 
+            self._vida += vida_curar
+            print(f"{self.nome} usou uma poção de curar e recuperou {vida_curar} pontos de sua vida")
 
 
 class Mago(Personagem):
@@ -67,9 +75,14 @@ class Mago(Personagem):
             self._nivel_personagem += 1
 
     def curar(self):
-        fator = random.randint(1,self._vida)
-        self._vida += fator
-        print(f"{self.nome} usou uma magía de cura e recuperou {fator} pontos de vida")
+        vida_cheia = self._nivel_personagem * 15
+        if self._vida == 0:
+            print(f"O {self.nome}({self._nivel_personagem}) Não pode se curar, pois ele morreu!")
+
+        elif self._vida < vida_cheia: 
+            vida_curar = self._vida - vida_cheia  
+            self._vida += vida_curar
+            print(f"{self.nome} usou uma magía de cura e recuperou {vida_curar} pontos de vida")
 
 
 class Monstro(Personagem): 
@@ -96,9 +109,15 @@ class Monstro(Personagem):
         
 
     def curar(self):
-        fator = random.randint(1,self._vida) 
-        if self._nivel_personagem >= 90:
-            print(f"O {self.nome}({self._nivel_personagem}) usou uma magia negra e recuperou {fator} pontos de vida. ") 
+        vida_cheia = self._nivel_personagem * 10
+        if self._vida == 0: 
+            print(f"O {self.nome}({self._nivel_personagem}) não pode se curar, pois ele morreu!")
+
+        elif self._vida < vida_cheia and self._nivel_personagem >= 90:
+            vida_curar = self._vida - vida_cheia  
+            self._vida += vida_curar
+            print(f"O {self.nome}({self._nivel_personagem}) usou uma magia negra e recuperou {vida_curar} pontos de vida. ") 
+
         else: 
             print(f"O {self.nome}({self._nivel_personagem}) tentou usar magia negra para reupearar sua vida, mas ele não tem o nível necessário")
 
