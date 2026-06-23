@@ -9,13 +9,14 @@ class Personagem(ABC):
         self.golpes = []
 
     def atacar(self,alvo):
-        forca = random.randint(1,self._vida)
+        forca = self._nivel_personagem * 10 
+        fator = random.randint(1,forca)
          # Só ataca se a vida de ambos for maior que 0 
         if self._vida > 0 and alvo._vida > 0: 
             # gerar um golpe aleatório 
             golpe = self.golpes[random.randrange(0,len(self.golpes))]
-            print(f"{self.nome}({self._nivel_personagem}) atacou o {alvo.nome}({alvo._nivel_personagem}) com um {golpe} de forca {forca}")
-            alvo.receber_dano(forca)
+            print(f"{self.nome}({self._nivel_personagem}) atacou o {alvo.nome}({alvo._nivel_personagem}) com um {golpe} de forca {fator}")
+            alvo.receber_dano(fator)
 
     def receber_dano(self,dano):
          # Gerar um numeor de 1 até a força(dano), para ver quanto de dano o alvo sofre. como se fosse um dado. 
