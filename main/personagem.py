@@ -19,12 +19,11 @@ class Personagem(ABC):
 
     def receber_dano(self,dano):
          # Gerar um numeor de 1 até a força(dano), para ver quanto de dano o alvo sofre. como se fosse um dado. 
-        fator = random.randint(1,dano)
-        self._vida -= fator
+        self._vida -= dano
         if self._vida <= 0: 
-            print(f"{self.nome}({self._nivel_personagem}) recebeu {fator} de dano e Morreu!")
+            print(f"{self.nome}({self._nivel_personagem}) recebeu {dano} de dano e Morreu!")
         else: 
-            print(f"{self.nome}({self._nivel_personagem}) recebeu dano de {fator} e ficou com {self._vida} de vida ") 
+            print(f"{self.nome}({self._nivel_personagem}) recebeu dano de {dano} e ficou com {self._vida} de vida ") 
 
     @abstractmethod
     def aumentar_nivel(self): 
@@ -54,6 +53,7 @@ class Guerreiro(Personagem):
         if self._vida == 0: 
             print(f" O {self.nome}({self._nivel_personagem}) não pode se curar, pois ele morreu!")
 
+            
         # Só recupera a vida se ela estiver abaixo da vida total
         elif self._vida < vida_cheia:
             # ver o quanto de vida ele vai recuperar
