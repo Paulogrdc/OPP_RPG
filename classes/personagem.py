@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 import random
 
-class Personagem(ABC): 
+class Personagem(ABC):
+    max_nivel_personagem = 20 
     def __init__(self):
         self.nome = ""
         self._vida = 1 # Protegido(#)
@@ -31,6 +32,10 @@ class Personagem(ABC):
         pass  
 
     @abstractmethod
+    def chegou_nivel_max(self):
+        pass
+
+    @abstractmethod
     def curar(self): 
         pass
 
@@ -40,19 +45,25 @@ class Guerreiro(Personagem):
         self.nome = nome 
         self._barra_xp = 0 
         self._nivel_personagem = 1
-        self._vida = self._nivel_personagem * 25
+        self._vida = self._nivel_personagem * 20
         self.golpes = ["soco", "joelhada", "chute"]
 
 
     def aumentar_nivel(self):
         if self._barra_xp >= 50: 
-            self._nivel_personagem += 1 
+            self._nivel_personagem += 1
+        
+    def chegou_nivel_max(self):
+        if self._nivel_personagem == self.max_nivel_personagem: 
+            return True 
+        else: 
+            return False 
 
     def curar(self):
-        vida_cheia = self._nivel_personagem * 25
+        vida_cheia = self._nivel_personagem * 20
         # se o personagem morrer, ele não pode se cuarar 
-        if self._vida == 0: 
-            print(f" O {self.nome}({self._nivel_personagem}) não pode se curar, pois ele morreu!")
+        if self._vida <= 0: 
+            print(f" O {self.nome}({self._nivel_personagem}) tentou se curar, mas ele não consegiu!")
             
         # Só recupera a vida se ela estiver abaixo da vida total
         elif self._vida < vida_cheia:
@@ -68,16 +79,22 @@ class Mago(Personagem):
         self.nome = nome
         self._barra_xp = 0
         self._nivel_personagem = 1 
-        self._vida = self._nivel_personagem * 25
+        self._vida = self._nivel_personagem *20
         self.golpes = ["Esfera negra ", "Raio de luz", "Bola de fogo"]
 
 
     def aumentar_nivel(self):
-        if self._barra_xp > 50: 
+         if self._barra_xp >= 50: 
             self._nivel_personagem += 1
 
+    def chegou_nivel_max(self):
+        if self._nivel_personagem == self.max_nivel_personagem: 
+            return True 
+        else: 
+            return False
+
     def curar(self):
-        vida_cheia = self._nivel_personagem * 25
+        vida_cheia = self._nivel_personagem * 20
         if self._vida == 0:
             print(f"O {self.nome}({self._nivel_personagem}) Não pode se curar, pois ele morreu!")
 
@@ -88,6 +105,7 @@ class Mago(Personagem):
 
 
 class Monstro(Personagem): 
+
     def __init__(self):
         self.nome = "monstro de level"
         self._nivel_personagem = 1  # Protegido (#)
@@ -99,8 +117,12 @@ class Monstro(Personagem):
     def aumentar_nivel(self):
         self._nivel_personagem += 1
         self._vida = self._nivel_personagem * 5
-        if self._nivel_personagem == 100: 
-            print("Você chegou no boss de nível máximo") 
+    
+    def chegou_nivel_max(self):
+        if self._nivel_personagem == self.max_nivel_personagem: 
+             return True 
+        else: 
+            return False
 
     def dar_xp(self,alvo):
         if self._vida <= 0: 

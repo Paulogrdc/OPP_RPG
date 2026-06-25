@@ -46,6 +46,7 @@ def main(): # função principal
                     p1.aumentar_nivel()
                     p1.curar()
                     m1.aumentar_nivel()
+                    verificar_nivel_max(p1,m1)
                     
 if __name__ == "__main__":
     main()
