@@ -1,0 +1,1 @@
+ p1.aumentar_nivel()
