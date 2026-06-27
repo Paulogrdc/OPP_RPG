@@ -1,4 +1,5 @@
 from classes.personagem import * 
+from rich import print
 
 def menu(): 
     print(" Digite 1 para criar personagem")
@@ -6,17 +7,18 @@ def menu():
     print(" Digite 3 para batalhar")
     print(" Digite 4 para sair do jogo")
 
-def verificar_nivel_max(heroi, monstro):
+def verificar_fim_jogo(heroi):
     level_max_h = heroi.chegou_nivel_max()
-    level_max_m= monstro.chegou_nivel_max()
+    if level_max_h == True: 
+        return 4 
+        # fazer com que o navegar receba o numeor 4 e finalize o jogo. 
 
-    if level_max_m == True: 
-        print(f"O {monstro.nome}({monstro._nivel_personagem}) chegou no nivel máximo")
-        menu()
-        navegar = int(input("Escolha uma opção: "))
-    elif level_max_h == True: 
-        print(f"O {heroi.nome}({heroi._nivel_personagem}) chegou no nivel maáximo ")
-        menu()
-        navegar = int(input("Escolha uma opção: "))
-
-
+def verificar_morte(heroi, monstro):
+    if heroi._vida <=0: 
+        menu()  
+        return int(input("Escolha uma opção: "))
+    elif monstro._vida <= 0: 
+        monstro.dar_xp(heroi)
+        heroi.aumentar_nivel()
+        heroi.curar()
+        monstro.aumentar_nivel()

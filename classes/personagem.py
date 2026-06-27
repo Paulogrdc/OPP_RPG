@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import random
+from rich import print
 
 class Personagem(ABC):
     max_nivel_personagem = 20 
@@ -88,10 +89,9 @@ class Mago(Personagem):
             self._nivel_personagem += 1
 
     def chegou_nivel_max(self):
-        if self._nivel_personagem == self.max_nivel_personagem: 
-            return True 
-        else: 
-            return False
+        if self._nivel_personagem == self.max_nivel_personagem:
+            print(f" [blue] O {self.nome}({self._nivel_personagem}) chegou no nivel máximo e o jogo terminou[/]")
+            return True
 
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
@@ -120,9 +120,7 @@ class Monstro(Personagem):
     
     def chegou_nivel_max(self):
         if self._nivel_personagem == self.max_nivel_personagem: 
-             return True 
-        else: 
-            return False
+            print(f"O {self.nome}({self._nivel_personagem}) chegou no nivel máximo. [red]Hora da batalha final![/] ")
 
     def dar_xp(self,alvo):
         if self._vida <= 0: 

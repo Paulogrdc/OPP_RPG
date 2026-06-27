@@ -35,18 +35,18 @@ def main(): # função principal
                 print(f"O {nome_personagem} tem {p1._vida} pontos de vida e seu nivel é {p1._nivel_personagem}")
                 menu()
                 navegar = int(input("Escolha uma opção: "))
-            case 3: 
+            case 3:
                 p1.atacar(m1)
                 m1.atacar(p1)
-                if p1._vida <=0: 
-                    menu()  
+                cont_batalhando = input("Você quer continuar batalhando? Y/N: ")
+                if  cont_batalhando.upper() == "N":
+                    print("Você voltou Para o menu principal")
+                    menu()
                     navegar = int(input("Escolha uma opção: "))
-                elif m1._vida <= 0: 
-                    m1.dar_xp(p1)
-                    p1.aumentar_nivel()
-                    p1.curar()
-                    m1.aumentar_nivel()
-                    verificar_nivel_max(p1,m1)
+                verificar_morte(p1,m1)
+               
                     
+
+
 if __name__ == "__main__":
     main()
