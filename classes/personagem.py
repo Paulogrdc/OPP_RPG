@@ -56,9 +56,8 @@ class Guerreiro(Personagem):
         
     def chegou_nivel_max(self):
         if self._nivel_personagem == self.max_nivel_personagem: 
+            print(f" [blue] O {self.nome}({self._nivel_personagem}) chegou no nivel máximo e o jogo terminou[/]")
             return True 
-        else: 
-            return False 
 
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
