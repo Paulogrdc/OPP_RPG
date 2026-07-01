@@ -44,22 +44,26 @@ class Personagem(ABC):
 class Guerreiro(Personagem):
     def __init__(self, nome):
         self.nome = nome 
-        self._barra_xp = 0 
+        self._barra_xp = 0 # 175
         self._nivel_personagem = 1
+        self._barra_xp_completar = self._nivel_personagem * 50
         self._vida = self._nivel_personagem * 20
         self.golpes = ["soco", "joelhada", "chute"]
 
 
     def aumentar_nivel(self):
-        if self._barra_xp >= 50: 
+        if self._barra_xp >= self._barra_xp_completar:
+            self._barra_xp_completar = self._nivel_personagem * 50 
+            self._barra_xp = self._barra_xp_completar - self._barra_xp 
             self._nivel_personagem += 1
             print(f"{self.nome} Subiu de nivel e agora esta no nivel {self._nivel_personagem}")
-            self._barra_xp = 0
-        
+
+
     def chegou_nivel_max(self):
         if self._nivel_personagem == self.max_nivel_personagem: 
             print(f" [blue] O {self.nome}({self._nivel_personagem}) chegou no nivel máximo e o jogo terminou[/]")
             return True 
+        
 
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
@@ -88,15 +92,17 @@ class Mago(Personagem):
 
     def aumentar_nivel(self):
         if self._barra_xp >= self._barra_xp_completar: 
+            self._barra_xp_completar = self._nivel_personagem * 50 
+            self._barra_xp = self._barra_xp_completar - self._barra_xp 
             self._nivel_personagem += 1
             print(f"{self.nome} Subiu de nivel e agora esta no nivel {self._nivel_personagem}")
-            self._barra_xp -= self._barra_xp_completar
-            self._barra_xp_completar = self._nivel_personagem * 50 
+
 
     def chegou_nivel_max(self):
         if self._nivel_personagem == self.max_nivel_personagem:
             print(f" [blue] O {self.nome}({self._nivel_personagem}) chegou no nivel máximo e o jogo terminou[/]")
             return True
+
 
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
