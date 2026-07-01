@@ -30,10 +30,17 @@ def main(): # função principal
 
                 except ValueError: 
                     print("Valor invalido! Digite o núemro 1 ou 2,respectivamente,para escolher o personagem.")
-            case 2: 
-                print(f"O {nome_personagem} tem {p1._vida} pontos de vida e seu nivel é {p1._nivel_personagem}")
-                menu()
-                navegar = int(input("Escolha uma opção: "))
+
+
+            case 2:
+                try: 
+                    p1.status_personagem()
+                    menu()
+                    navegar = int(input("Escolha uma opção: "))
+                except UnboundLocalError: 
+                    print("Você não criou nenhum personagem. Escolaha a opção para criar um personagem")
+                    menu()
+                    navegar = int(input("Escolha uma opção: "))
 
             case 3:
                 p1.atacar(m1)

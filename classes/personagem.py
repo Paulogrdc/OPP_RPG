@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import random
 from rich import print
+from rich.console import Console
+from rich.table import Table 
 
 class Personagem(ABC):
     max_nivel_personagem = 20 
@@ -27,6 +29,19 @@ class Personagem(ABC):
             print(f"{self.nome}({self._nivel_personagem}) recebeu {dano} de dano e Morreu!")
         else: 
             print(f"{self.nome}({self._nivel_personagem}) recebeu dano de {dano} e ficou com {self._vida} de vida ") 
+
+    def status_personagem(self):
+        # Colunas
+        caixa = Table(title="Personagens")
+        caixa.add_column("Categoria")
+        caixa.add_column("Nome")
+        caixa.add_column("Nivel")
+        caixa.add_column("Vida")
+
+        # Linhas 
+        caixa.add_row(str(self.__class__.__name__), self.nome, str(self._nivel_personagem), str(self._vida))
+        console = Console()
+        console.print(caixa)
 
     @abstractmethod
     def aumentar_nivel(self): 
