@@ -55,6 +55,7 @@ def main(): # função principal
                         p1.curar()
                         m1.aumentar_nivel()
                         cont_batalhando = input("Você quer continuar batalhando? Y/N: ")
+
                         if  cont_batalhando.upper() == "N":
                             print("Você voltou Para o menu principal")
                             menu()

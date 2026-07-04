@@ -156,6 +156,7 @@ class Monstro(Personagem):
             print(f"O {alvo.nome} recebeu {self._xp} de xp. XP: {alvo._barra_xp}/{alvo._barra_xp_completar}")
         
 
+    # ajustar o metodo curar do monstro
     def curar(self):
         vida_cheia = self._nivel_personagem * 10
         if self._vida == 0: 
