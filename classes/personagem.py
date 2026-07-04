@@ -59,11 +59,11 @@ class Personagem(ABC):
 class Guerreiro(Personagem):
     def __init__(self, nome):
         self.nome = nome 
-        self._barra_xp = 0 # 175
-        self._nivel_personagem = 1
-        self._barra_xp_completar = self._nivel_personagem * 50
-        self._vida = self._nivel_personagem * 20
-        self.golpes = ["soco", "joelhada", "chute"]
+        self._barra_xp = 0 # Protegido(#)
+        self._nivel_personagem = 1 # Protegido(#)
+        self._barra_xp_completar = self._nivel_personagem * 50 # Protegido(#)
+        self._vida = self._nivel_personagem * 20 # Protegido(#)
+        self.golpes = ["soco", "joelhada", "chute"] 
 
 
     def aumentar_nivel(self):
@@ -98,10 +98,10 @@ class Guerreiro(Personagem):
 class Mago(Personagem):
     def __init__(self, nome):
         self.nome = nome
-        self._barra_xp = 0
-        self._nivel_personagem = 1
-        self._barra_xp_completar = self._nivel_personagem * 50 
-        self._vida = self._nivel_personagem *20
+        self._barra_xp = 0 # Protegido(#)
+        self._nivel_personagem = 1 # Protegido(#)
+        self._barra_xp_completar = self._nivel_personagem * 50 # Protegido(#) 
+        self._vida = self._nivel_personagem *20 # Protegido(#)
         self.golpes = ["Esfera negra ", "Raio de luz", "Bola de fogo"]
 
 
@@ -133,16 +133,19 @@ class Mago(Personagem):
 class Monstro(Personagem): 
 
     def __init__(self):
-        self.nome = "monstro de level"
+        self.nome = "monstro de level" # Publica(+) 
         self._nivel_personagem = 1  # Protegido (#)
         self._vida = self._nivel_personagem * 5  # Protegido(#)
         self._xp = 1 # Protegido (#)
         self.golpes = ["cuspir fogo", "soco", "machado cortante"] 
 
 
-    def aumentar_nivel(self):
+    def aumentar_nivel(self,alvo):
         self._nivel_personagem += 1
         self._vida = self._nivel_personagem * 5
+    
+    def reiniciar_nivel(self): 
+        self._nivel_personagem = 1
     
     def chegou_nivel_max(self):
         if self._nivel_personagem == self.max_nivel_personagem: 
