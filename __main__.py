@@ -38,27 +38,31 @@ def main(): # função principal
                     menu()
                     navegar = int(input("Escolha uma opção: "))
                 except UnboundLocalError: 
-                    print("Você não criou nenhum personagem. Escolaha a opção para criar um personagem")
+                    print("Você não criou nenhum personagem. Escolha a opção para criar um personagem")
                     menu()
                     navegar = int(input("Escolha uma opção: "))
 
             case 3:
-                p1.atacar(m1)
-                m1.atacar(p1)
-                if p1._vida <=0:
-                    menu()
-                    navegar = int(input("Escolha uma opção: "))
-                elif m1._vida <= 0: 
-                    m1.dar_xp(p1)
-                    p1.aumentar_nivel()
-                    p1.curar()
-                    m1.aumentar_nivel()
-                    print(p1._barra_xp)
-                    cont_batalhando = input("Você quer continuar batalhando? Y/N: ")
-                    if  cont_batalhando.upper() == "N":
-                        print("Você voltou Para o menu principal")
+                try:
+                    p1.atacar(m1)
+                    m1.atacar(p1)
+                    if p1._vida <=0:
                         menu()
-                        navegar = int(input("Escolha uma opção: "))       
+                        navegar = int(input("Escolha uma opção: "))
+                    elif m1._vida <= 0: 
+                        m1.dar_xp(p1)
+                        p1.aumentar_nivel()
+                        p1.curar()
+                        m1.aumentar_nivel()
+                        cont_batalhando = input("Você quer continuar batalhando? Y/N: ")
+                        if  cont_batalhando.upper() == "N":
+                            print("Você voltou Para o menu principal")
+                            menu()
+                            navegar = int(input("Escolha uma opção: "))
+                except UnboundLocalError: 
+                    print(f"Escolha um personagem antes de começar a batalha.")
+                    menu()
+                    navegar = int(input("Escolha uma opção: ")) 
             case 4:
                 break 
 
