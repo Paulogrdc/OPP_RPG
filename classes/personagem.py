@@ -51,11 +51,6 @@ class Personagem(ABC):
     def chegou_nivel_max(self):
         pass
 
-    @abstractmethod
-    def curar(self): 
-        pass
-
-
 class Guerreiro(Personagem):
     def __init__(self, nome):
         self.nome = nome 
@@ -159,18 +154,3 @@ class Monstro(Personagem):
             alvo._barra_xp = self._xp
             print(f"O {alvo.nome} recebeu {self._xp} de xp. XP: {alvo._barra_xp}/{alvo._barra_xp_completar}")
         
-
-    # ajustar o metodo curar do monstro
-    def curar(self):
-        vida_cheia = self._nivel_personagem * 10
-        if self._vida == 0: 
-            print(f"O {self.nome}({self._nivel_personagem}) não pode se curar, pois ele morreu!")
-
-        elif self._vida < vida_cheia and self._nivel_personagem >= 90:
-            vida_curar = self._vida - vida_cheia  
-            self._vida += vida_curar
-            print(f"O {self.nome}({self._nivel_personagem}) usou uma magia negra e recuperou {vida_curar} pontos de vida. ") 
-
-        else: 
-            print(f"O {self.nome}({self._nivel_personagem}) tentou usar magia negra para reupearar sua vida, mas ele não tem o nível necessário")
-

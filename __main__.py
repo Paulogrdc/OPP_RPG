@@ -69,6 +69,5 @@ def main(): # função principal
             case 4:
                 break 
 
-
 if __name__ == "__main__":
     main()
