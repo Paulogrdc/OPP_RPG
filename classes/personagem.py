@@ -59,11 +59,11 @@ class Personagem(ABC):
 class Guerreiro(Personagem):
     def __init__(self, nome):
         self.nome = nome 
-        self._barra_xp = 0 # 175
-        self._nivel_personagem = 1
-        self._barra_xp_completar = self._nivel_personagem * 50
-        self._vida = self._nivel_personagem * 20
-        self.golpes = ["soco", "joelhada", "chute"]
+        self._barra_xp = 0 # Protegido(#)
+        self._nivel_personagem = 1 # Protegido(#)
+        self._barra_xp_completar = self._nivel_personagem * 50 # Protegido(#)
+        self._vida = self._nivel_personagem * 20 # Protegido(#)
+        self.golpes = ["soco", "joelhada", "chute"] 
 
 
     def aumentar_nivel(self):
@@ -98,10 +98,10 @@ class Guerreiro(Personagem):
 class Mago(Personagem):
     def __init__(self, nome):
         self.nome = nome
-        self._barra_xp = 0
-        self._nivel_personagem = 1
-        self._barra_xp_completar = self._nivel_personagem * 50 
-        self._vida = self._nivel_personagem *20
+        self._barra_xp = 0 # Protegido(#)
+        self._nivel_personagem = 1 # Protegido(#)
+        self._barra_xp_completar = self._nivel_personagem * 50 # Protegido(#) 
+        self._vida = self._nivel_personagem *20 # Protegido(#)
         self.golpes = ["Esfera negra ", "Raio de luz", "Bola de fogo"]
 
 
@@ -131,26 +131,30 @@ class Mago(Personagem):
 
 
 class Monstro(Personagem): 
-
+    max_nivel_personagem = 25 
     def __init__(self):
-        self.nome = "monstro de level"
+        self.nome = "monstro de level" # Publica(+) 
         self._nivel_personagem = 1  # Protegido (#)
         self._vida = self._nivel_personagem * 5  # Protegido(#)
         self._xp = 1 # Protegido (#)
         self.golpes = ["cuspir fogo", "soco", "machado cortante"] 
 
 
-    def aumentar_nivel(self):
+    def aumentar_nivel(self,alvo):
         self._nivel_personagem += 1
         self._vida = self._nivel_personagem * 5
     
+    def reiniciar_nivel(self): 
+        self._nivel_personagem = 1
+    
     def chegou_nivel_max(self):
-        if self._nivel_personagem == self.max_nivel_personagem: 
-            print(f"O {self.nome}({self._nivel_personagem}) chegou no nivel máximo. [red]Hora da batalha final![/] ")
+        if self._nivel_personagem == Monstro.max_nivel_personagem and self._vida >= 0: 
+            print(f"[red]O {self.nome}  máximo foi derrotado e o jogo terminou![/]")
+            return True
 
     def dar_xp(self,alvo):
         if self._vida <= 0: 
-            self._xp = self._nivel_personagem * 25
+            self._xp = self._nivel_personagem * 35
             print(f"O {self.nome} Morreu e deu {self._xp} de xp")
             alvo._barra_xp = self._xp
             print(f"O {alvo.nome} recebeu {self._xp} de xp. XP: {alvo._barra_xp}/{alvo._barra_xp_completar}")
