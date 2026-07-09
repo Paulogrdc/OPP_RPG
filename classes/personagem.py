@@ -19,7 +19,7 @@ class Personagem(ABC):
         if self._vida > 0 and alvo._vida > 0: 
             # gerar um golpe aleatório 
             golpe = self.golpes[random.randrange(0,len(self.golpes))]
-            print(f"[#AEA897]{self.nome}({self._nivel_personagem}) atacou o {alvo.nome}({alvo._nivel_personagem}) com um {golpe} de forca {fator}[/]")
+            print(f"[#AEA897]{self.nome}({self._nivel_personagem}) atacou o {alvo.nome}({alvo._nivel_personagem}) com um {golpe} de forca {fator}[/] \n")
             alvo.receber_dano(fator)
 
     def receber_dano(self,dano):

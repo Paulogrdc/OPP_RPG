@@ -44,7 +44,7 @@ def main(): # função principal
             case 3:
                 try:
                     p1.atacar(m1)
-                    m1.atacar(p1)
+                    m1.atacar(p1) 
                     if p1._vida <=0:
                         m1.reiniciar_nivel()
                         menu()

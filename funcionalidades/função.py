@@ -1,9 +1,12 @@
 from classes.personagem import * 
 from rich import print
+from rich.panel import Panel 
 
-def menu(): 
-    print(" [#A5A8AF]Digite 1 para criar personagem[/]")
-    print(" [#A5A8AF]Digite 2 para ver o status do personagem[/]")
-    print(" [#A5A8AF]Digite 3 para batalhar[/]")
-    print(" [#A5A8AF]Digite 4 para sair do jogo[/]")
+def menu():
+    conteudo = "[#A5A8AF]DIGITE 1 PARA CRIAR O PERSONAGEM[/]\n"
+    conteudo += "[#A5A8AF]DIGITE 2 PARA VER O STATUS DO PERSONAGEM[/]\n"
+    conteudo += "[#A5A8AF]DIGITE 3 PARA BATALHAR[/]\n"
+    conteudo += "[#A5A8AF]DIGITE 4 PARA SAIR DO JOGO[/]"
+    menu = Panel(conteudo, title="Menu",width=55)
+    print(menu)
 
