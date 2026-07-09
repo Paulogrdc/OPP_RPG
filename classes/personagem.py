@@ -53,6 +53,7 @@ class Personagem(ABC):
 
 class Guerreiro(Personagem):
     def __init__(self, nome):
+        super().__init__() 
         self.nome = nome 
         self._barra_xp = 0 # Protegido(#)
         self._nivel_personagem = 1 # Protegido(#)
@@ -92,6 +93,7 @@ class Guerreiro(Personagem):
 
 class Mago(Personagem):
     def __init__(self, nome):
+        super().__init__()  
         self.nome = nome
         self._barra_xp = 0 # Protegido(#)
         self._nivel_personagem = 1 # Protegido(#)
@@ -116,7 +118,7 @@ class Mago(Personagem):
 
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
-        if self._vida == 0:
+        if self._vida <= 0: # !
             print(f"[red]O {self.nome}({self._nivel_personagem}) Não pode se curar, pois ele morreu![/]")
 
         elif self._vida < vida_cheia: 
@@ -128,6 +130,7 @@ class Mago(Personagem):
 class Monstro(Personagem): 
     max_nivel_personagem = 25 
     def __init__(self):
+        super().__init__() 
         self.nome = "monstro de level" # Publica(+) 
         self._nivel_personagem = 1  # Protegido (#)
         self._vida = self._nivel_personagem * 5  # Protegido(#)
@@ -135,7 +138,7 @@ class Monstro(Personagem):
         self.golpes = ["cuspir fogo", "soco", "machado cortante"] 
 
 
-    def aumentar_nivel(self,alvo):
+    def aumentar_nivel(self):
         self._nivel_personagem += 1
         self._vida = self._nivel_personagem * 5
     
