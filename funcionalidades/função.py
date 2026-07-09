@@ -2,8 +2,8 @@ from classes.personagem import *
 from rich import print
 
 def menu(): 
-    print(" Digite 1 para criar personagem")
-    print(" Digite 2 para ver o status do personagem")
-    print(" Digite 3 para batalhar")
-    print(" Digite 4 para sair do jogo")
+    print(" [#A5A8AF]Digite 1 para criar personagem[/]")
+    print(" [#A5A8AF]Digite 2 para ver o status do personagem[/]")
+    print(" [#A5A8AF]Digite 3 para batalhar[/]")
+    print(" [#A5A8AF]Digite 4 para sair do jogo[/]")
 

@@ -10,12 +10,12 @@ def main(): # função principal
         match navegar: 
 
             case 1: 
-                print("1-Guerreiro")
-                print("2-Mago")
+                print("[#716C59]1-Guerreiro")
+                print("[#6F5F48]2-Mago")
                 try: 
                     personagem = int(input("Escolha o personagem: "))
                     if personagem == 1: 
-                        nome_personagem = str(input("Escolha um nome para o Guerreiro: "))
+                        nome_personagem = str(input(" Escolha um nome para o Guerreiro: "))
                         p1 = Guerreiro(nome_personagem)
                         print("[green]Personagem criado com sucesso![/]")
                         menu() 

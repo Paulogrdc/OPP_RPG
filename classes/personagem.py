@@ -19,16 +19,16 @@ class Personagem(ABC):
         if self._vida > 0 and alvo._vida > 0: 
             # gerar um golpe aleatório 
             golpe = self.golpes[random.randrange(0,len(self.golpes))]
-            print(f"{self.nome}({self._nivel_personagem}) atacou o {alvo.nome}({alvo._nivel_personagem}) com um {golpe} de forca {fator}")
+            print(f"[#AEA897]{self.nome}({self._nivel_personagem}) atacou o {alvo.nome}({alvo._nivel_personagem}) com um {golpe} de forca {fator}[/]")
             alvo.receber_dano(fator)
 
     def receber_dano(self,dano):
          # Gerar um numeor de 1 até a força(dano), para ver quanto de dano o alvo sofre. como se fosse um dado. 
         self._vida -= dano
         if self._vida <= 0: 
-            print(f"{self.nome}({self._nivel_personagem}) recebeu {dano} de dano e Morreu!")
+            print(f"[red]{self.nome}({self._nivel_personagem}) recebeu {dano} de dano e Morreu![/]")
         else: 
-            print(f"{self.nome}({self._nivel_personagem}) recebeu dano de {dano} e ficou com {self._vida} de vida ") 
+            print(f"[red]{self.nome}({self._nivel_personagem}) recebeu dano de {dano} e ficou com {self._vida} de vida[/]") 
 
     def status_personagem(self):
         # Colunas
@@ -117,11 +117,11 @@ class Mago(Personagem):
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
         if self._vida == 0:
-            print(f"O {self.nome}({self._nivel_personagem}) Não pode se curar, pois ele morreu!")
+            print(f"[red]O {self.nome}({self._nivel_personagem}) Não pode se curar, pois ele morreu![/]")
 
         elif self._vida < vida_cheia: 
             vida_curar = vida_cheia  - self._vida
-            print(f"{self.nome} usou uma magía de cura e recuperou {vida_curar} pontos de vida")
+            print(f"[green]{self.nome} usou uma magía de cura e recuperou {vida_curar} pontos de vida[/]")
             self._vida += vida_curar
 
 
@@ -144,13 +144,13 @@ class Monstro(Personagem):
     
     def chegou_nivel_max(self):
         if self._nivel_personagem == Monstro.max_nivel_personagem and self._vida >= 0: 
-            print(f"[red]O {self.nome}  máximo foi derrotado e o jogo terminou![/]")
+            print(f"[red]O {self.nome} máximo foi derrotado e o jogo terminou![/]")
             return True
 
     def dar_xp(self,alvo):
         if self._vida <= 0: 
             self._xp = self._nivel_personagem * 35
-            print(f"O {self.nome} Morreu e deu {self._xp} de xp")
+            print(f"[yellow] O {self.nome}({self._nivel_personagem}) deu {self._xp} de xp [/]")
             alvo._barra_xp = self._xp
-            print(f"O {alvo.nome} recebeu {self._xp} de xp. XP: {alvo._barra_xp}/{alvo._barra_xp_completar}")
+            print(f"[yellow] O {alvo.nome} recebeu {self._xp} de xp. XP: {alvo._barra_xp}/{alvo._barra_xp_completar} [/]")
         
