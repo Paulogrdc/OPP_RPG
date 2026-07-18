@@ -5,18 +5,29 @@ from rich.console import Console
 from rich.table import Table 
 
 class Personagem(ABC):
+    #Atributo da classe
     max_nivel_personagem = 20 
     def __init__(self):
+        # Atributos
         self.nome = ""
         self._vida = 1 # Protegido(#)
         self._nivel_personagem = 1 # Protegido(#)
         self.golpes = []
 
+        # Métodos acessores 
+        @property  # fazendo isso as classe filhas já herdam esse método acessor
+        def vida(self): 
+            return self._vida 
+        
+        @vida.setter
+        def vida(self,valor): 
+            self._vida = valor
+
     def atacar(self,alvo):
         forca = self._nivel_personagem * 5
         fator = random.randint(1,forca)
          # Só ataca se a vida de ambos for maior que 0 
-        if self._vida > 0 and alvo._vida > 0: 
+        if self.vida > 0 and alvo.vida > 0: 
             # gerar um golpe aleatório 
             golpe = self.golpes[random.randrange(0,len(self.golpes))]
             print(f"[#AEA897]{self.nome}({self._nivel_personagem}) atacou o {alvo.nome}({alvo._nivel_personagem}) com um {golpe} de forca {fator}[/] \n")
@@ -24,11 +35,11 @@ class Personagem(ABC):
 
     def receber_dano(self,dano):
          # Gerar um numeor de 1 até a força(dano), para ver quanto de dano o alvo sofre. como se fosse um dado. 
-        self._vida -= dano
-        if self._vida <= 0: 
+        self.vida -= dano
+        if self.vida <= 0: 
             print(f"[red]{self.nome}({self._nivel_personagem}) recebeu {dano} de dano e Morreu![/]")
         else: 
-            print(f"[red]{self.nome}({self._nivel_personagem}) recebeu dano de {dano} e ficou com {self._vida} de vida[/]") 
+            print(f"[red]{self.nome}({self._nivel_personagem}) recebeu dano de {dano} e ficou com {self.vida} de vida[/]") 
 
     def status_personagem(self):
         # Colunas
@@ -53,11 +64,12 @@ class Personagem(ABC):
 
 class Guerreiro(Personagem):
     def __init__(self, nome):
+        super().__init__() 
         self.nome = nome 
         self._barra_xp = 0 # Protegido(#)
         self._nivel_personagem = 1 # Protegido(#)
         self._barra_xp_completar = self._nivel_personagem * 50 # Protegido(#)
-        self._vida = self._nivel_personagem * 20 # Protegido(#)
+        self._vida = self._nivel_personagem * 20 # Protegido(#) 
         self.golpes = ["soco", "joelhada", "chute"] 
 
 
@@ -78,20 +90,21 @@ class Guerreiro(Personagem):
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
         # se o personagem morrer, ele não pode se cuarar 
-        if self._vida <= 0: 
+        if self.vida <= 0: 
             print(f" O {self.nome}({self._nivel_personagem}) tentou se curar, mas ele não consegiu!")
             
         # Só recupera a vida se ela estiver abaixo da vida total
-        elif self._vida < vida_cheia:
+        elif self.vida < vida_cheia:
             # ver o quanto de vida ele vai recuperar
-            vida_curar = vida_cheia - self._vida  
+            vida_curar = vida_cheia - self.vida  
             print(f"{self.nome} usou uma poção de curar e recuperou {vida_curar} pontos de sua vida")
-            self._vida = self._vida + vida_curar
+            self.vida += vida_curar
             
 
 
 class Mago(Personagem):
     def __init__(self, nome):
+        super().__init__() 
         self.nome = nome
         self._barra_xp = 0 # Protegido(#)
         self._nivel_personagem = 1 # Protegido(#)
@@ -116,18 +129,19 @@ class Mago(Personagem):
 
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
-        if self._vida == 0:
+        if self.vida == 0:
             print(f"[red]O {self.nome}({self._nivel_personagem}) Não pode se curar, pois ele morreu![/]")
 
-        elif self._vida < vida_cheia: 
-            vida_curar = vida_cheia  - self._vida
+        elif self.vida < vida_cheia: 
+            vida_curar = vida_cheia  - self.vida
             print(f"[green]{self.nome} usou uma magía de cura e recuperou {vida_curar} pontos de vida[/]")
-            self._vida += vida_curar
+            self.vida += vida_curar
 
 
 class Monstro(Personagem): 
     max_nivel_personagem = 25 
     def __init__(self):
+        super().__init__() 
         self.nome = "monstro de level" # Publica(+) 
         self._nivel_personagem = 1  # Protegido (#)
         self._vida = self._nivel_personagem * 5  # Protegido(#)
@@ -137,18 +151,18 @@ class Monstro(Personagem):
 
     def aumentar_nivel(self,alvo):
         self._nivel_personagem += 1
-        self._vida = self._nivel_personagem * 5
+        self.vida = self._nivel_personagem * 5
     
     def reiniciar_nivel(self): 
         self._nivel_personagem = 1
     
     def chegou_nivel_max(self):
-        if self._nivel_personagem == Monstro.max_nivel_personagem and self._vida >= 0: 
+        if self._nivel_personagem == Monstro.max_nivel_personagem and self.vida >= 0: 
             print(f"[red]O {self.nome} máximo foi derrotado e o jogo terminou![/]")
             return True
 
     def dar_xp(self,alvo):
-        if self._vida <= 0: 
+        if self.vida <= 0: 
             self._xp = self._nivel_personagem * 35
             print(f"[yellow] O {self.nome}({self._nivel_personagem}) deu {self._xp} de xp [/]")
             alvo._barra_xp = self._xp
