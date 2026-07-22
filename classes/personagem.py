@@ -7,10 +7,10 @@ from rich.table import Table
 class Personagem(ABC):
     #Atributo da classe
     max_nivel_personagem = 20 
-    def __init__(self):
+    def __init__(self, nome = None):
         # Atributos
-        self.nome = ""
-        self._vida = 1 # Protegido(#)
+        self.nome = nome
+        self._vida = self._nivel_personagem * 20 # Protegido(#)
         self._nivel_personagem = 1 # Protegido(#)
         self.golpes = []
 
@@ -18,10 +18,6 @@ class Personagem(ABC):
         @property  # fazendo isso as classe filhas já herdam esse método acessor
         def vida(self): 
             return self._vida 
-        
-        @vida.setter
-        def vida(self,valor): 
-            self._vida = valor
 
     def atacar(self,alvo):
         forca = self._nivel_personagem * 5
@@ -64,12 +60,9 @@ class Personagem(ABC):
 
 class Guerreiro(Personagem):
     def __init__(self, nome):
-        super().__init__() 
-        self.nome = nome 
+        super().__init__(self, nome) # nesse super init, eu só passo o que estiver dentro do init da classe mãe
         self._barra_xp = 0 # Protegido(#)
-        self._nivel_personagem = 1 # Protegido(#)
         self._barra_xp_completar = self._nivel_personagem * 50 # Protegido(#)
-        self._vida = self._nivel_personagem * 20 # Protegido(#) 
         self.golpes = ["soco", "joelhada", "chute"] 
 
 
@@ -104,12 +97,9 @@ class Guerreiro(Personagem):
 
 class Mago(Personagem):
     def __init__(self, nome):
-        super().__init__() 
-        self.nome = nome
+        super().__init__(self, nome ) # nesse super init, eu só passo o que estiver dentro do init da classe mãe
         self._barra_xp = 0 # Protegido(#)
-        self._nivel_personagem = 1 # Protegido(#)
         self._barra_xp_completar = self._nivel_personagem * 50 # Protegido(#) 
-        self._vida = self._nivel_personagem *20 # Protegido(#)
         self.golpes = ["Esfera negra ", "Raio de luz", "Bola de fogo"]
 
 
@@ -141,7 +131,7 @@ class Mago(Personagem):
 class Monstro(Personagem): 
     max_nivel_personagem = 25 
     def __init__(self):
-        super().__init__() 
+        super().__init__(self, self.nome) 
         self.nome = "monstro de level" # Publica(+) 
         self._nivel_personagem = 1  # Protegido (#)
         self._vida = self._nivel_personagem * 5  # Protegido(#)
