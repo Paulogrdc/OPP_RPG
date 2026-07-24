@@ -20,7 +20,7 @@ class Personagem(ABC):
     def vida(self): 
         return self._vida 
 
-    @vida.setter
+    @vida.setter 
     def vida(self, valor): 
         if valor <= 0: 
             self._vida = 0 
@@ -68,11 +68,10 @@ class Personagem(ABC):
 
 class Guerreiro(Personagem):
     def __init__(self, nome):
-        super().__init__(nome, Personagem._nivel_personagem * 20) # nesse super init, eu só passo o que estiver dentro do init da classe mãe
+        super().__init__(nome, Personagem._nivel_personagem * 20) # nesse super init, eu só passo o que estiver dentro do init da classe mãe  
         self._barra_xp = 0 # Protegido(#)
         self._barra_xp_completar = self._nivel_personagem * 50 # Protegido(#)
         self.golpes = ["soco", "joelhada", "chute"] 
-
 
     def aumentar_nivel(self):
         if self._barra_xp >= self._barra_xp_completar:
