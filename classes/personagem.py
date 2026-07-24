@@ -75,9 +75,8 @@ class Guerreiro(Personagem):
 
     def aumentar_nivel(self):
         if self._barra_xp >= self._barra_xp_completar:
-            self._barra_xp_completar = self._nivel_personagem * 50 
-            self._barra_xp = self._barra_xp_completar - self._barra_xp 
             self._nivel_personagem += 1
+            self._barra_xp = self._barra_xp_completar - self._barra_xp            
             print(f"{self.nome} Subiu de nivel e agora esta no nivel {self._nivel_personagem}")
 
 
@@ -112,9 +111,8 @@ class Mago(Personagem):
 
     def aumentar_nivel(self):
         if self._barra_xp >= self._barra_xp_completar: 
-            self._barra_xp_completar = self._nivel_personagem * 50 
+            self._nivel_personagem += 1 
             self._barra_xp = self._barra_xp_completar - self._barra_xp 
-            self._nivel_personagem += 1
             print(f"{self.nome} Subiu de nivel e agora esta no nivel {self._nivel_personagem}")
 
 
@@ -159,6 +157,6 @@ class Monstro(Personagem):
         if self.vida <= 0: 
             self._xp = self._nivel_personagem * 35
             print(f"[yellow] O {self.nome}({self._nivel_personagem}) deu {self._xp} de xp [/]")
-            alvo._barra_xp = self._xp
+            alvo._barra_xp += self._xp
             print(f"[yellow] O {alvo.nome} recebeu {self._xp} de xp. XP: {alvo._barra_xp}/{alvo._barra_xp_completar} [/]")
         
