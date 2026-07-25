@@ -6,9 +6,11 @@ def main(): # função principal
     menu()
     navegar = int(input("Escolha uma opção: "))
 
+    # Cria um menu interativo 
     while navegar !=4 : 
         match navegar: 
 
+            # case 1: escolher os personagens
             case 1: 
                 print("[#716C59]1-Guerreiro")
                 print("[#6F5F48]2-Mago")
@@ -30,7 +32,7 @@ def main(): # função principal
                 except ValueError: 
                     print("Valor invalido! Digite o núemro 1 ou 2,respectivamente,para escolher o personagem.")
 
-
+            # case 2: Ver os status do personagem 
             case 2:
                 try: 
                     p1.status_personagem()
@@ -41,6 +43,7 @@ def main(): # função principal
                     menu()
                     navegar = int(input("Escolha uma opção: "))
 
+            # case 3: Batalhar 
             case 3:
                 try:
                     p1.atacar(m1)
@@ -66,6 +69,7 @@ def main(): # função principal
                     print(f"Escolha um personagem antes de começar a batalha.")
                     menu()
                     navegar = int(input("Escolha uma opção: ")) 
+            # case 4: Sair do jogo        
             case 4:
                 break 
 

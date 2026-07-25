@@ -46,6 +46,8 @@ class Personagem(ABC):
             print(f"[red]{self.nome}({self._nivel_personagem}) recebeu dano de {dano} e ficou com {self.vida} de vida[/]") 
 
     def status_personagem(self):
+        # Permite ver o Status do personagem 
+        
         # Colunas
         caixa = Table(title="Personagens")
         caixa.add_column("Categoria")
@@ -74,6 +76,7 @@ class Guerreiro(Personagem):
         self.golpes = ["soco", "joelhada", "chute"] 
 
     def aumentar_nivel(self):
+        #Aumenta o nivel do personagem se a barra de xp estiver completa 
         if self._barra_xp >= self._barra_xp_completar:
             self._nivel_personagem += 1
             self._barra_xp = self._barra_xp_completar - self._barra_xp            
@@ -81,6 +84,7 @@ class Guerreiro(Personagem):
 
 
     def chegou_nivel_max(self):
+        # Verifica se o personagem chegou no nivel máximo
         if self._nivel_personagem == self.max_nivel_personagem: 
             print(f" [blue] O {self.nome}({self._nivel_personagem}) chegou no nivel máximo e o jogo terminou[/]")
             return True 
@@ -110,6 +114,7 @@ class Mago(Personagem):
 
 
     def aumentar_nivel(self):
+        #Aumenta o nivel do personagem se a barra de xp estiver completa
         if self._barra_xp >= self._barra_xp_completar: 
             self._nivel_personagem += 1 
             self._barra_xp = self._barra_xp_completar - self._barra_xp 
@@ -117,6 +122,7 @@ class Mago(Personagem):
 
 
     def chegou_nivel_max(self):
+        # Verifica se o personagem chegou no nivel máximo
         if self._nivel_personagem == self.max_nivel_personagem:
             print(f" [blue] O {self.nome}({self._nivel_personagem}) chegou no nivel máximo e o jogo terminou[/]")
             return True
@@ -124,36 +130,44 @@ class Mago(Personagem):
 
     def curar(self):
         vida_cheia = self._nivel_personagem * 20
+        # se o personagem morrer, ele não pode se cuarar 
         if self._vida <= 0: # !
             print(f"[red]O {self.nome}({self._nivel_personagem}) Não pode se curar, pois ele morreu![/]")
 
+        # Só recupera a vida se ela estiver abaixo da vida total
         elif self.vida < vida_cheia: 
             vida_curar = vida_cheia  - self.vida
             print(f"[green]{self.nome} usou uma magía de cura e recuperou {vida_curar} pontos de vida[/]")
             self.vida += vida_curar
 
 
-class Monstro(Personagem): 
+class Monstro(Personagem):
+    # Atributos da classe  
     max_nivel_personagem = 25 
     def __init__(self):
+        # Atributos 
         super().__init__("monstro de level", Personagem._nivel_personagem * 5) 
         self._xp = 1 # Protegido (#)
         self.golpes = ["cuspir fogo", "soco", "machado cortante"] 
 
-
+    # Métodos 
     def aumentar_nivel(self):
+        #Aumenta o nivel do monstro 
         self._nivel_personagem += 1
         self.vida = self._nivel_personagem * 5
     
     def reiniciar_nivel(self): 
+        #Reinicia o nivel do monstro 
         self._nivel_personagem = 1
     
     def chegou_nivel_max(self):
+        # verifica se o mosntro chegou no nivel máximo
         if self._nivel_personagem == Monstro.max_nivel_personagem and self.vida >= 0: 
             print(f"[red]O {self.nome} máximo foi derrotado e o jogo terminou![/]")
             return True
 
     def dar_xp(self,alvo):
+        # Se a vida do Monstro estiver abaixo ou ingual a 0, libera uma quantidade de xp para o alvo
         if self.vida <= 0: 
             self._xp = self._nivel_personagem * 35
             print(f"[yellow] O {self.nome}({self._nivel_personagem}) deu {self._xp} de xp [/]")

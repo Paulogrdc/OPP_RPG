@@ -1,7 +1,8 @@
-from classes.personagem import * 
 from rich import print
 from rich.panel import Panel 
 
+
+# função para escolha das opações usando o Panel 
 def menu():
     conteudo = "[#A5A8AF]DIGITE 1 PARA CRIAR O PERSONAGEM[/]\n"
     conteudo += "[#A5A8AF]DIGITE 2 PARA VER O STATUS DO PERSONAGEM[/]\n"
