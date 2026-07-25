@@ -45,11 +45,11 @@ def main(): # função principal
                 try:
                     p1.atacar(m1)
                     m1.atacar(p1) 
-                    if p1._vida <=0:
+                    if p1.vida <=0:
                         m1.reiniciar_nivel()
                         menu()
                         navegar = int(input("Escolha uma opção: "))
-                    elif m1._vida <= 0: 
+                    elif m1.vida <= 0: 
                         m1.dar_xp(p1)
                         p1.aumentar_nivel()
                         p1.curar()
